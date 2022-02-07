@@ -4,7 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators'
 
 // declaring the api url that contains data
-let rootURL = 'https://quiet-headland-10477.herokuapp.com/';
+// let rootURL = 'https://quiet-headland-10477.herokuapp.com/';
 
 //this is a decorator, adds metadata to a class 
 // the 'root' tells Angular that this service is available every
@@ -24,15 +24,15 @@ export class UserRegistrationService {
   //HTTP modules use observables to handle AJAX requests and responses; send data from child to parent compoenent
   public userRegistration(userDetails: any): Observable<any> { //method takes an arguement type of 'any' type of data that userDetails is
     console.log(userDetails);
-    return this.http.post(rootURL + 'users', userDetails).pipe(
+    return this.http.post('https://quiet-headland-10477.herokuapp.com/users', userDetails).pipe(
       catchError(this.handleError)
     );
     //function instructs a post request to the API endpoint `rootURL/${users}`
   }
-
+  
   public userLogin(userDetails: any): Observable<any> { //method takes an arguement type of 'any' type of data that userDetails is
     console.log(userDetails);
-    return this.http.post(rootURL + 'login', userDetails).pipe(
+    return this.http.post('https://quiet-headland-10477.herokuapp.com/login', userDetails).pipe(
       catchError(this.handleError)
     );
   }
@@ -40,7 +40,7 @@ export class UserRegistrationService {
   //api call to obtain all 'movies' data
   getAllMovies(): Observable<any> {
     let token = localStorage.getItem('token');
-    return this.http.get(rootURL + 'movies', {
+    return this.http.get('https://quiet-headland-10477.herokuapp.com/movies', {
       headers: new HttpHeaders(
         {
           Authorization: 'Bearer' + token,
@@ -51,9 +51,9 @@ export class UserRegistrationService {
     );
   }
 
-  getMovie(): Observable<any> {
+  getMovie(title: any): Observable<any> {
     let token = localStorage.getItem('token');
-    return this.http.get(rootURL + 'movies/:Title', { 
+    return this.http.get(`https://quiet-headland-10477.herokuapp.com/movies/${title}`, { 
       headers: new HttpHeaders(
         {
           Authorization: 'Bearer' + token,
@@ -64,9 +64,9 @@ export class UserRegistrationService {
     );
   }
 
-  getGenre(): Observable<any> {
+  getGenre(id: any): Observable<any> {
     let token = localStorage.getItem('token');
-    return this.http.get(rootURL + 'genre/:id', { 
+    return this.http.get(`https://quiet-headland-10477.herokuapp.com/genres/${id}`, { 
       headers: new HttpHeaders(
         {
           Authorization: 'Bearer' + token,
@@ -77,9 +77,9 @@ export class UserRegistrationService {
     );
   }
 
-  getDirector(): Observable<any> {
+  getDirector(id: any): Observable<any> {
     let token = localStorage.getItem('token');
-    return this.http.get(rootURL + 'directors/:id', {
+    return this.http.get(`https://quiet-headland-10477.herokuapp.com/genres/${id}`, { 
       headers: new HttpHeaders(
         {
           Authorization: 'Bearer' + token,
@@ -90,22 +90,9 @@ export class UserRegistrationService {
     );
   }
 
-  getUser(): Observable<any> {
+  getUser(username: any): Observable<any> {
     let token = localStorage.getItem('token');
-    return this.http.get(rootURL + 'users/:Username', {
-      headers: new HttpHeaders(
-        {
-          Authorization: 'Bearer' + token,
-        })
-    }).pipe(
-      map(this.extractResponseData),
-      catchError(this.handleError)
-    );
-  }
-
-  getUserFavoriteMovies(): Observable<any> {
-    let token = localStorage.getItem('token');
-    return this.http.get(rootURL + 'users/:Username/FavoriteMovies', {
+    return this.http.get(`https://quiet-headland-10477.herokuapp.com/users/${username}`, {
       headers: new HttpHeaders(
         {
           Authorization: 'Bearer' + token,
@@ -116,9 +103,9 @@ export class UserRegistrationService {
     );
   }
   
-  addFavoriteMovie(): Observable<any> {
+  addFavoriteMovie(username: any, movieId: any): Observable<any> {
     let token = localStorage.getItem('token');
-    return this.http.post(rootURL + 'users/:Username/movies/:id', {
+    return this.http.post(`https://quiet-headland-10477.herokuapp.com/users/${username}/movies/${movieId}`, {
       headers: new HttpHeaders(
         {
           Authorization: 'Bearer' + token,
@@ -129,9 +116,9 @@ export class UserRegistrationService {
     );
   }
   
-  deleteFavoriteMovie(): Observable<any> {
+  deleteFavoriteMovie(username: any, movieId: any): Observable<any> {
     let token = localStorage.getItem('token');
-    return this.http.delete(rootURL + 'users/:Username/movies/:id', {
+    return this.http.delete(`https://quiet-headland-10477.herokuapp.com/users/${username}/movies/${movieId}`, {
       headers: new HttpHeaders(
         {
           Authorization: 'Bearer' + token,
@@ -142,9 +129,9 @@ export class UserRegistrationService {
     );
   }
 
-  editUser(): Observable<any> {
+  profileUpdate(username: any): Observable<any> {
     let token = localStorage.getItem('token');
-    return this.http.put(rootURL + 'users/:Username', {
+    return this.http.put(`https://quiet-headland-10477.herokuapp.com/users/${username}`, {
       headers: new HttpHeaders(
         {
           Authorization: 'Bearer' + token,
@@ -155,9 +142,9 @@ export class UserRegistrationService {
     );
   }
 
-  deleteUser(): Observable<any> {
+  deleteUser(username: any): Observable<any> {
     let token = localStorage.getItem('token');
-    return this.http.delete(rootURL + 'users/:Username', {
+    return this.http.delete(`https://quiet-headland-10477.herokuapp.com/users/${username}`, {
       headers: new HttpHeaders(
         {
           Authorization: 'Bearer' + token,
