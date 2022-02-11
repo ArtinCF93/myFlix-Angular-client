@@ -13,7 +13,7 @@ import { map, catchError } from 'rxjs/operators'
 })
 
 
-export class UserRegistrationService {
+export class FetchApiDataService {
 
   //Inject the HttpClient module to the construct for use of Http
   //this is declared as dependcy in the constructor 
