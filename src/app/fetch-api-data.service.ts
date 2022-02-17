@@ -43,7 +43,7 @@ export class FetchApiDataService {
     return this.http.get('https://quiet-headland-10477.herokuapp.com/movies', {
       headers: new HttpHeaders(
         {
-          Authorization: 'Bearer' + token,
+          Authorization: 'Bearer ' + token,
         })
     }).pipe(
       map(this.extractResponseData),

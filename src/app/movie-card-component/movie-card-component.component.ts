@@ -9,7 +9,7 @@ import { FetchApiDataService } from '../fetch-api-data.service';
 export class MovieCardComponentComponent implements OnInit {
 
   //this is where the movies returned from the API will be kept
-  movies: any[] = [];
+  movies: any = [];
 
   constructor(
     public fetchApiData: FetchApiDataService,
