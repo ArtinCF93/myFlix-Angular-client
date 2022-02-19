@@ -79,7 +79,7 @@ export class FetchApiDataService {
 
   getDirector(id: any): Observable<any> {
     let token = localStorage.getItem('token');
-    return this.http.get(`https://quiet-headland-10477.herokuapp.com/genres/${id}`, { 
+    return this.http.get(`https://quiet-headland-10477.herokuapp.com/directors/${id}`, { 
       headers: new HttpHeaders(
         {
           Authorization: 'Bearer' + token,

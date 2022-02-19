@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FetchApiDataService } from '../fetch-api-data.service';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+// import { FetchApiDataService } from '../fetch-api-data.service';
 
 @Component({
   selector: 'app-movie-card-component',
@@ -9,22 +10,60 @@ import { FetchApiDataService } from '../fetch-api-data.service';
 export class MovieCardComponentComponent implements OnInit {
 
   //this is where the movies returned from the API will be kept
-  movies: any = [];
+  // movies = [
+  //   {
+  //     Title: 'Star Wars',
+  //     ImagePath: "https://m.media-amazon.com/images/I/81eZNmyL49L._AC_SY879_.jpg",
+  //     Director: 
+  //       { Name: 'George Lucas'}
+      
+  //   }
+  // ];
+
+  movies: any = []
 
   constructor(
-    public fetchApiData: FetchApiDataService,
+    private http: HttpClient
   ) { }
 
   //ngOnInit is called when Angular is done creating the component
   ngOnInit(): void {
-    this.getMovies();
+    this.getAllMovies();
   }
 
-  getMovies(): void {
-    this.fetchApiData.getAllMovies().subscribe((result: any) => {
-      this.movies = result;
-      console.log(this.movies);
-      return this.movies;
-    });
+  // getMovies(): void {
+  //   this.fetchApiData.getAllMovies().subscribe((result: any) => {
+  //     this.movies = result;
+  //     console.log(this.movies);
+  //     return this.movies;
+  //   });
+  // }
+
+  // getAllMovies(): Observable<any> {
+  //   let token = localStorage.getItem('token');
+  //   return this.http.get('https://quiet-headland-10477.herokuapp.com/movies', {
+  //     headers: new HttpHeaders(
+  //       {
+  //         Authorization: 'Bearer ' + token,
+  //       })
+  //   }).pipe(
+  //     map(this.extractResponseData),
+  //     catchError(this.handleError)
+  //   );
+  // }
+
+  getAllMovies() {
+    let token = localStorage.getItem('token');
+    this.http.get<any>('https://quiet-headland-10477.herokuapp.com/movies', {
+          headers: new HttpHeaders(
+            {
+              Authorization: 'Bearer ' + token,
+            })
+        }).subscribe(
+      response => {
+        console.log(response);
+        this.movies = response;
+      }
+    )
   }
 }
