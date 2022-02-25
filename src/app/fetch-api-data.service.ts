@@ -37,120 +37,30 @@ export class FetchApiDataService {
     );
   }
 
-  //api call to obtain all 'movies' data
-  getAllMovies(): Observable<any> {
+
+  profileUpdate(userDetails: any) {
     let token = localStorage.getItem('token');
-    return this.http.get('https://quiet-headland-10477.herokuapp.com/movies', {
+    let username = localStorage.getItem('user')
+    return this.http.put(`https://quiet-headland-10477.herokuapp.com/users/${username}`, userDetails, {
       headers: new HttpHeaders(
         {
           Authorization: 'Bearer ' + token,
         })
     }).pipe(
-      map(this.extractResponseData),
       catchError(this.handleError)
     );
   }
 
-  getMovie(title: any): Observable<any> {
-    let token = localStorage.getItem('token');
-    return this.http.get(`https://quiet-headland-10477.herokuapp.com/movies/${title}`, { 
-      headers: new HttpHeaders(
-        {
-          Authorization: 'Bearer' + token,
-        })
-    }).pipe(
-      map(this.extractResponseData),
-      catchError(this.handleError)
-    );
-  }
 
-  getGenre(id: any): Observable<any> {
+  deleteUser(): Observable<any> {
     let token = localStorage.getItem('token');
-    return this.http.get(`https://quiet-headland-10477.herokuapp.com/genres/${id}`, { 
-      headers: new HttpHeaders(
-        {
-          Authorization: 'Bearer' + token,
-        })
-    }).pipe(
-      map(this.extractResponseData),
-      catchError(this.handleError)
-    );
-  }
-
-  getDirector(id: any): Observable<any> {
-    let token = localStorage.getItem('token');
-    return this.http.get(`https://quiet-headland-10477.herokuapp.com/directors/${id}`, { 
-      headers: new HttpHeaders(
-        {
-          Authorization: 'Bearer' + token,
-        })
-    }).pipe(
-      map(this.extractResponseData),
-      catchError(this.handleError)
-    );
-  }
-
-  getUser(username: any): Observable<any> {
-    let token = localStorage.getItem('token');
-    return this.http.get(`https://quiet-headland-10477.herokuapp.com/users/${username}`, {
-      headers: new HttpHeaders(
-        {
-          Authorization: 'Bearer' + token,
-        })
-    }).pipe(
-      map(this.extractResponseData),
-      catchError(this.handleError)
-    );
-  }
-  
-  addFavoriteMovie(username: any, movieId: any): Observable<any> {
-    let token = localStorage.getItem('token');
-    return this.http.post(`https://quiet-headland-10477.herokuapp.com/users/${username}/movies/${movieId}`, {
-      headers: new HttpHeaders(
-        {
-          Authorization: 'Bearer' + token,
-        })
-    }).pipe(
-      map(this.extractResponseData),
-      catchError(this.handleError)
-    );
-  }
-  
-  deleteFavoriteMovie(username: any, movieId: any): Observable<any> {
-    let token = localStorage.getItem('token');
-    return this.http.delete(`https://quiet-headland-10477.herokuapp.com/users/${username}/movies/${movieId}`, {
-      headers: new HttpHeaders(
-        {
-          Authorization: 'Bearer' + token,
-        })
-    }).pipe(
-      map(this.extractResponseData),
-      catchError(this.handleError)
-    );
-  }
-
-  profileUpdate(username: any): Observable<any> {
-    let token = localStorage.getItem('token');
-    return this.http.put(`https://quiet-headland-10477.herokuapp.com/users/${username}`, {
-      headers: new HttpHeaders(
-        {
-          Authorization: 'Bearer' + token,
-        })
-    }).pipe(
-      map(this.extractResponseData),
-      catchError(this.handleError)
-    );
-  }
-
-  deleteUser(username: any): Observable<any> {
-    let token = localStorage.getItem('token');
+    let username = localStorage.getItem('user')
     return this.http.delete(`https://quiet-headland-10477.herokuapp.com/users/${username}`, {
       headers: new HttpHeaders(
         {
-          Authorization: 'Bearer' + token,
+          Authorization: 'Bearer ' + token,
         })
     }).pipe(
-      map(this.extractResponseData),
       catchError(this.handleError)
     );
   }

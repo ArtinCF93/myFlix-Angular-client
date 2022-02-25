@@ -13,23 +13,32 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule} from '@angular/material/icon';
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserRegistrationFormComponent } from './user-registration-form/user-registration-form.component';
 import { UserLoginFormComponent } from './user-login-form/user-login-form.component';
-import { MovieCardComponentComponent } from './movie-card-component/movie-card-component.component';
+import { MovieCardComponent } from './movie-card-component/movie-card-component.component';
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
+import { DirectorModalComponent } from './director-modal-component/director-modal-component.component';
+import { GenreModalComponent } from './genre-modal/genre-modal.component';
+import { MovieViewModalComponent } from './movie-view-modal/movie-view-modal.component';
+import { ProfileViewComponent } from './profile-view/profile-view.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserRegistrationFormComponent,
     UserLoginFormComponent,
-    MovieCardComponentComponent,
-    WelcomePageComponent
-  ],
+    MovieCardComponent,
+    WelcomePageComponent,
+    DirectorModalComponent,
+    GenreModalComponent,
+    MovieViewModalComponent,
+    ProfileViewComponent
+],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -43,6 +52,7 @@ import { WelcomePageComponent } from './welcome-page/welcome-page.component';
     MatSnackBarModule,
     FormsModule,
     MatIconModule,
+    MatToolbarModule,
     RouterModule.forRoot([
       {
         path: 'welcome',
@@ -58,7 +68,11 @@ import { WelcomePageComponent } from './welcome-page/welcome-page.component';
       },
       {
         path: 'movies',
-        component: MovieCardComponentComponent
+        component: MovieCardComponent
+      },
+      {
+        path: 'profile',
+        component: ProfileViewComponent
       },
       {
         path: '',
