@@ -12,15 +12,27 @@ import { map, catchError } from 'rxjs/operators'
   providedIn: 'root'
 })
 
-
+/**
+ * @class FetchApiDataService
+ * Service component that contain several api http requests
+ */
 export class FetchApiDataService {
 
   //Inject the HttpClient module to the construct for use of Http
-  //this is declared as dependcy in the constructor 
+  //this is declared as dependcy in the constructor
+  /**
+   * @function constructor
+   * @param http 
+   */ 
   constructor(private http: HttpClient) { }
 
 
-  //Making the api call for the user registration endpoint
+  /**
+   * Making a post api call for the user registration endpoint
+   * @function userRegistration
+   * @param userDetails 
+   * @returns {user}
+   */
   //HTTP modules use observables to handle AJAX requests and responses; send data from child to parent compoenent
   public userRegistration(userDetails: any): Observable<any> { //method takes an arguement type of 'any' type of data that userDetails is
     console.log(userDetails);
@@ -30,6 +42,11 @@ export class FetchApiDataService {
     //function instructs a post request to the API endpoint `rootURL/${users}`
   }
   
+  /**
+   * Making a post api call for the user login endpoint
+   * @param userDetails 
+   * @returns {user}
+   */
   public userLogin(userDetails: any): Observable<any> { //method takes an arguement type of 'any' type of data that userDetails is
     console.log(userDetails);
     return this.http.post('https://quiet-headland-10477.herokuapp.com/login', userDetails).pipe(
@@ -38,6 +55,11 @@ export class FetchApiDataService {
   }
 
 
+  /**
+   * Making a put api call for the user update endpoint
+   * @param userDetails 
+   * @returns {user} updated
+   */
   profileUpdate(userDetails: any) {
     let token = localStorage.getItem('token');
     let username = localStorage.getItem('user')
@@ -51,7 +73,10 @@ export class FetchApiDataService {
     );
   }
 
-
+/**
+ * Making a delete api call for the user update endpoint
+ * @function deleteUser
+ */
   deleteUser(): Observable<any> {
     let token = localStorage.getItem('token');
     let username = localStorage.getItem('user')
@@ -72,6 +97,11 @@ export class FetchApiDataService {
     return body || {};
   }
 
+  /**
+   * @function handleError
+   * @param error 
+   * @returns error code
+   */
   private handleError(error: HttpErrorResponse): any {
     if(error.error instanceof ErrorEvent) {
       console.error('Some error occurred:', error.error.message);

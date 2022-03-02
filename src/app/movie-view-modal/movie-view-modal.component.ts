@@ -6,10 +6,20 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
   templateUrl: './movie-view-modal.component.html',
   styleUrls: ['./movie-view-modal.component.css']
 })
+
+/**
+ * @class MovieViewModalComponent
+ * This component is a modal that renders the movie information
+ * of the clicked movie
+ */
 export class MovieViewModalComponent implements OnInit {
 
   movie: any = []
   
+  /**
+   * @function constructor
+   * @param http 
+   */
   constructor(
     private http: HttpClient,
   ) { }
@@ -18,6 +28,11 @@ export class MovieViewModalComponent implements OnInit {
     this.getMovie(localStorage.getItem('MovieTitle'))
   }
 
+  /**
+   * Render information of a single movie
+   * @function getMovie
+   * @param Title 
+   */
   getMovie(Title: any) {
     let token = localStorage.getItem('token');
     this.http.get<any>(`https://quiet-headland-10477.herokuapp.com/movies/${Title}`, {

@@ -11,10 +11,22 @@ import { FetchApiDataService } from '../fetch-api-data.service';
   templateUrl: './user-login-form.component.html',
   styleUrls: ['./user-login-form.component.css']
 })
+
+/**
+ * @class UserLoginFormComponent
+ * This component is a modal that renders the login form
+ */
 export class UserLoginFormComponent implements OnInit {
 
   @Input() userLoginData = { Username: '', Password: ''}
 
+  /**
+   * @function constructor
+   * @param fetchApiData 
+   * @param dialogRef 
+   * @param snackBar 
+   * @param router 
+   */
   constructor(
     public fetchApiData: FetchApiDataService,
     public dialogRef: MatDialogRef<UserLoginFormComponent>,
@@ -25,6 +37,10 @@ export class UserLoginFormComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /**
+   * Logins a user by calling the userLogin function
+   * @function loginUser
+   */
   loginUser(): void {
     this.fetchApiData.userLogin(this.userLoginData).subscribe((result) => {
       localStorage.setItem('user', result.user.Username)

@@ -18,7 +18,10 @@ import { GenreModalComponent } from '../genre-modal/genre-modal.component';
 
 /**
  * @class MovieCardComponent
- * Describe the compoenent
+ * This is the landing page in which all the movies from the
+ * database are listed. Each of the movies will have buttons
+ * that will expand infromation about them including Director,
+ * Genre, Synopsis
  */
 export class MovieCardComponent implements OnInit {
 
@@ -26,7 +29,7 @@ export class MovieCardComponent implements OnInit {
   movies: any = []
 
   /**
-   * 
+   * @function constructor
    * @param http 
    * @param dialog 
    * @param router 
@@ -83,7 +86,11 @@ export class MovieCardComponent implements OnInit {
     )
   }
 
-
+/**
+ * Opens the DirectorModalComponent in a modal
+ * @function openDirectorDialog
+ * @param id 
+ */
   openDirectorDialog(id: any): void {
     localStorage.setItem('DirectorId', id) // this saves the id of the Director of the chosen movie and saves it as DirectorId in localstorage and binds it with the component
     this.dialog.open(DirectorModalComponent, {
@@ -103,6 +110,11 @@ export class MovieCardComponent implements OnInit {
     })
   }
 
+  /**
+   * Opens the GenreModalComponent in a modal
+   * @function openMovieDialog
+   * @param Title 
+   */
   openMovieDialog(Title: any): void {
     localStorage.setItem('MovieTitle', Title)
     this.dialog.open(MovieViewModalComponent, {

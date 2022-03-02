@@ -12,10 +12,21 @@ import { FetchApiDataService } from '../fetch-api-data.service';
   templateUrl: './user-registration-form.component.html', //this is the userinterface of the component
   styleUrls: ['./user-registration-form.component.css'] //the style of component
 })
+
+/**
+ * @class UserRegistrationFormComponent
+ * This component is a modal that renders the registration form
+ */
 export class UserRegistrationFormComponent implements OnInit {
 
   @Input() userData = { Name: '', Username: '', Password: '', Email: '', Birthday: ''};
 
+  /**
+   * @function constructor
+   * @param fetchApiData 
+   * @param dialogRef 
+   * @param snackBar 
+   */
   constructor( //these will all be used as keywords below in registerUser() function
     public fetchApiData: FetchApiDataService,
     public dialogRef: MatDialogRef<UserRegistrationFormComponent>,
@@ -25,6 +36,10 @@ export class UserRegistrationFormComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /**
+   * Registers a user by calling the userRegistration function
+   * @function registerUser
+   */
   //this is the function responsible for sending form inputs to the backend
   registerUser(): void {
     this.fetchApiData.userRegistration(this.userData).subscribe((result) => {

@@ -10,6 +10,11 @@ import { Router } from '@angular/router';
   templateUrl: './profile-view.component.html',
   styleUrls: ['./profile-view.component.css']
 })
+
+/**
+ * @class ProfileViewComponent
+ * This component returns page that displays user infromation
+ */
 export class ProfileViewComponent implements OnInit {
 
   user: any = []
@@ -19,7 +24,13 @@ export class ProfileViewComponent implements OnInit {
 
   @Input() userData = { Name: this.user.Name, Username: this.user.Username, Password: this.user.Password, Email: this.user.Email, Birthday: this.user.Birthday};
 
-
+/**
+ * @function constructor
+ * @param http 
+ * @param fetchApiData 
+ * @param snackBar 
+ * @param router 
+ */
   constructor(
     private http: HttpClient,
     public fetchApiData: FetchApiDataService,
@@ -32,6 +43,11 @@ export class ProfileViewComponent implements OnInit {
     this.getAllMatchingMovies()
   }
 
+  /**
+   * @function getUser
+   * @returns user information from database that matches the 'username' in the localStorage
+   * @returns {this.user.FavoriteMovies} and places it in this.favoriteMovies array
+   */
   getUser() {
     let token = localStorage.getItem('token');
     let username = localStorage.getItem('user')
@@ -50,7 +66,11 @@ export class ProfileViewComponent implements OnInit {
     );
   }
 
-
+/**
+ * gets all of user's favorite movies
+ * @function getAllMatchingMovies
+ * @returns Each movie that matches a movie._id from this.favoriteMovies
+ */
   getAllMatchingMovies() {
     let token = localStorage.getItem('token');
     this.http.get<any>('https://quiet-headland-10477.herokuapp.com/movies', {
@@ -72,6 +92,11 @@ export class ProfileViewComponent implements OnInit {
     )
   }
 
+  /**
+   * Updates a user's details by calling profileUpdate function
+   * @function updateUser
+   * @returns {this.user} updated
+   */
   updateUser(): void {
     this.fetchApiData.profileUpdate(this.userData).subscribe((result: any) => {
       //logic for a successful user registration goes here!
@@ -88,6 +113,10 @@ export class ProfileViewComponent implements OnInit {
     });
   }
 
+/**
+ * Deletes a user from database by calling deleteUser function
+ * @function deleteUser
+ */
   deleteUser(): void {
     this.fetchApiData.deleteUser().subscribe((result: any) => {
       //logic for a successful user registration goes here!
@@ -105,6 +134,11 @@ export class ProfileViewComponent implements OnInit {
     });
   }
 
+  /**
+   * Deletes a movie from user's favorite list
+   * @function deleteFavoriteMovie
+   * @param id 
+   */
   deleteFavoriteMovie(id: any) {
     let token = localStorage.getItem('token');
     let username = localStorage.getItem('user');
@@ -116,14 +150,23 @@ export class ProfileViewComponent implements OnInit {
     }).subscribe(
       response => {
         console.log(response);
+        this.router.navigate(['profile']);
       }
     )
   }
 
+  /**
+   * navigates to the user's profile
+   * @function navigatetoProfile
+   */
   navigatetoProfile(): void {
     this.router.navigate(['profile']);
   }
 
+  /**
+   * navigates to movies list
+   * @function navigatetoMovies
+   */
   navigatetoMovies(): void {
     this.router.navigate(['movies']);
   }
