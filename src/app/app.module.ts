@@ -84,4 +84,9 @@ import { ProfileViewComponent } from './profile-view/profile-view.component';
   providers: [],
   bootstrap: [AppComponent]
 })
+
+/**
+ * This is the apps module library
+ * @class AppModule
+ */
 export class AppModule { }

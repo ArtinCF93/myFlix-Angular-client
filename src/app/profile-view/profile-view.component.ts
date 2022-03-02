@@ -43,7 +43,7 @@ export class ProfileViewComponent implements OnInit {
     }).subscribe(
       response => {
         this.user = response;
-        this.favoriteMovies = response.FavoriteMovies;
+        this.favoriteMovies = response.FavoriteMovies
         console.log(response)
         console.log(response.FavoriteMovies)
       }
@@ -62,11 +62,12 @@ export class ProfileViewComponent implements OnInit {
       response => {
         response.forEach((element: any) => {
           
-        if (this.favoriteMovies.includes(element._id) ) {
+        if (this.favoriteMovies.includes(element._id)) {
           this.matchingMovies.push(element)
         } 
         })
         console.log(this.matchingMovies);
+        return this.matchingMovies
       }
     )
   }
@@ -94,12 +95,13 @@ export class ProfileViewComponent implements OnInit {
       this.snackBar.open(result, 'Successfully Deleted', {
         duration: 2000
       });
-      this.router.navigate(['welcome']);
     }, (result) => {
-      console.log(result);
-      this.snackBar.open(result, 'Something went wrong', {
-        duration: 2000
-      });
+      // this.snackBar.open(result, 'Something went wrong', {
+      //   duration: 2000
+      // });
+      localStorage.setItem('user', '')
+      localStorage.setItem('token', '')
+      this.router.navigate(['welcome']);
     });
   }
 
