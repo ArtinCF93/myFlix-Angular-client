@@ -1,6 +1,8 @@
-# MyFlixAngularClient
+# Achievement 6: MovieFlix: Angular App
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.2.
+This project focuses on the client-side of my MovieFlix API application, built using Angular. This project relies on existing server-side code (REST API and database that I also built). The GitHub Repository for that project can be found here: https://github.com/ArtinCF93/movie_flix_api
+
+To view this published Angular application, please visit: https://artincf93.github.io/myFlix-Angular-client/welcome
 
 ## Development server
 
