@@ -171,4 +171,10 @@ export class ProfileViewComponent implements OnInit {
     this.router.navigate(['movies']);
   }
 
+  signOutUser(): void {
+    localStorage.removeItem('user')
+    localStorage.removeItem('token');
+    this.router.navigate(['welcome']);
+  }
+
 }

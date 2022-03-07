@@ -1,3 +1,4 @@
+<body>
 <mat-toolbar>
     <button
     mat-button
@@ -8,8 +9,8 @@
     </button>
 </mat-toolbar>
 <!-- this refers to displaying the list of movies; movies refers to the movies variable -->
-<div style='display: flex;'>
-    <mat-card *ngFor='let movie of movies;' style='flex: 1 1 auto'>
+<div class="card-container">
+    <mat-card *ngFor='let movie of movies;' class="mat-card">
         <mat-card-header>
             <mat-card-title>{{movie.Title}}</mat-card-title>
         </mat-card-header>
@@ -37,11 +38,14 @@
             >
                 Synopsis
             </button>
-            <mat-icon
-                (click) = 'addFavoriteMovie(movie._id)'
-            >
-                favorite_border
-            </mat-icon>
         </mat-card-actions>
+        <button
+            mat-icon-button
+            color="warn"
+            (click) = 'addFavoriteMovie(movie._id)'
+        >
+            <mat-icon>favorite</mat-icon>
+    </button>
     </mat-card>
 </div>
+</body>
